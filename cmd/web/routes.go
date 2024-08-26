@@ -14,5 +14,7 @@ func (app *application) routes() http.Handler {
 	mux.Use(middleware.Recoverer)
 	mux.Use(middleware.Timeout(50 * time.Second))
 
+	mux.Get("/", app.ShowHome)
+
 	return mux
 }
