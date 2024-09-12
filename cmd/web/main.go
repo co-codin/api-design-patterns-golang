@@ -14,6 +14,7 @@ const port = ":4000"
 type application struct {
 	templateMap map[string]*template.Template
 	config appConfig
+	models models.mo
 }
 
 type appConfig struct {

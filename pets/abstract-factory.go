@@ -25,3 +25,6 @@ func (cff *CatFromFactory) Show() string {
 	return fmt.Sprintf("This animal is a %s", cff.Pet.Breed.Breed)
 }
 
+type PetFactoryInterface interface {
+	newPet() AnimalInterface
+}
