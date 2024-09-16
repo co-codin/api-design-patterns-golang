@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"flag"
 	"fmt"
 	"html/template"
@@ -14,6 +15,7 @@ const port = ":4000"
 type application struct {
 	templateMap map[string]*template.Template
 	config      appConfig
+	DB          *sql.DB
 }
 
 type appConfig struct {
@@ -30,6 +32,12 @@ func main() {
 	flag.StringVar(&app.config.dsn, "dsn", "mariadb:myverysecretpassword@tcp(localhost:3309)/breeders?parseTime=true&tls=false&collation=utf8_unicode_ci&timeout=5s", "DSN")
 	flag.Parse()
 
+	db, err := initMySQLDB(app.config.dsn)
+	if err != nil {
+		log.Panic(err)
+	}
+	app.DB = db
+
 	srv := &http.Server{
 		Addr:              port,
 		Handler:           app.routes(),
@@ -41,7 +49,7 @@ func main() {
 
 	fmt.Println("Starting web application on port", port)
 
-	err := srv.ListenAndServe()
+	err = srv.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
 	}
