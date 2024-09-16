@@ -29,7 +29,7 @@ func main() {
 	}
 
 	flag.BoolVar(&app.config.useCache, "cache", false, "Use template cache")
-	flag.StringVar(&app.config.dsn, "dsn", "mariadb:myverysecretpassword@tcp(localhost:3309)/breeders?parseTime=true&tls=false&collation=utf8_unicode_ci&timeout=5s", "DSN")
+	flag.StringVar(&app.config.dsn, "dsn", "root:hellojava@tcp(localhost:3306)/breeders?parseTime=true&tls=false&collation=utf8_unicode_ci&timeout=5s", "DSN")
 	flag.Parse()
 
 	db, err := initMySQLDB(app.config.dsn)
