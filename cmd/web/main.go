@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
-	"html/template"
 	"time"
 )
 
@@ -13,13 +13,11 @@ const port = ":4000"
 
 type application struct {
 	templateMap map[string]*template.Template
-	config appConfig
-	models models.mo
+	config      appConfig
 }
 
 type appConfig struct {
 	useCache bool
-
 }
 
 func main() {
