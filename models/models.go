@@ -31,7 +31,8 @@ type DogBreed struct {
 }
 
 func (d *DogBreed) All() ([]*DogBreed, error) {
-	return nil, nil
+	return d.AllDogBreeds()
+
 }
 
 type CatBreed struct {
