@@ -2,4 +2,4 @@ run:
 	go run ./cmd/web
 
 test:
-	go test -v -count=1 .
+	cd cmd/web && go test -v -count=1 .
