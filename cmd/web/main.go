@@ -2,7 +2,6 @@ package main
 
 import (
 	"api-design-patterns/models"
-	"database/sql"
 	"flag"
 	"fmt"
 	"html/template"
@@ -16,7 +15,7 @@ const port = ":4000"
 type application struct {
 	templateMap map[string]*template.Template
 	config      appConfig
-	DB          *sql.DB
+	repo        models.Repository
 	Models      models.Models
 }
 
@@ -38,7 +37,6 @@ func main() {
 	if err != nil {
 		log.Panic(err)
 	}
-	app.DB = db
 	app.Models = *models.New(db)
 
 	srv := &http.Server{
